@@ -1,65 +1,120 @@
+/* IMPORT FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
 body {
-  font-family: 'Comic Sans MS', sans-serif;
-  background: linear-gradient(to right, #a8edea, #fed6e3);
-  text-align: center;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+  overflow-x: hidden;
 }
 
+/* SLIDE SYSTEM */
 .slide {
   display: none;
+  min-height: 100vh;
   padding: 40px;
+  box-sizing: border-box;
 }
 
 .active {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fade 0.6s ease;
 }
 
-h1, h2 {
-  color: #333;
+@keyframes fade {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
+/* GLASS CARD */
+.card {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+h1 {
+  font-size: 38px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+/* TEXT */
+.intro {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* BUTTON */
 button {
-  padding: 10px 20px;
-  margin: 10px;
+  padding: 12px 25px;
+  border-radius: 30px;
   border: none;
-  border-radius: 20px;
-  background-color: #ff7eb3;
+  background: linear-gradient(45deg, #ff758c, #ff7eb3);
   color: white;
   font-size: 16px;
   cursor: pointer;
+  margin: 10px;
+  transition: 0.3s;
 }
 
 button:hover {
-  background-color: #ff4f91;
+  transform: scale(1.1);
 }
 
-.profile {
-  width: 150px;
-  border-radius: 50%;
+/* IMAGE */
+.hero-img {
+  width: 180px;
+  margin-bottom: 20px;
+  animation: float 3s infinite ease-in-out;
 }
 
-canvas {
-  border: 2px solid #333;
-  margin-top: 20px;
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-15px);}
 }
 
-.intro {
-  max-width: 600px;
-  margin: auto;
+/* QUIZ */
+#quiz-container {
+  background: rgba(255,255,255,0.3);
+  padding: 25px;
+  border-radius: 20px;
 }
+
+/* ANSWERS */
 #answers button {
   display: block;
-  margin: 10px auto;
-  width: 200px;
+  width: 100%;
+  margin: 10px 0;
 }
 
-#quiz-container {
-  background: white;
-  padding: 20px;
+/* PROGRESS BAR */
+.progress {
+  height: 10px;
+  background: #ddd;
   border-radius: 20px;
-  display: inline-block;
+  margin-bottom: 20px;
 }
 
-#feedback {
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #ff6fa5;
+  border-radius: 20px;
+  transition: 0.4s;
+}
+
+/* SCORE */
+#finalScore {
+  font-size: 22px;
   font-weight: bold;
-  margin-top: 10px;
 }

@@ -1,514 +1,433 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WaveQuest: Petualangan Gelombang & Cahaya</title>
-    <style>
-        /* --- CSS STYLING & PALET WARNA CERIA --- */
-        :root {
-            --primary: #FF6B6B; /* Coral ceria */
-            --secondary: #4ECDC4; /* Teal segar */
-            --accent: #FFE66D; /* Kuning cerah */
-            --dark: #2F3E46;
-            --light: #F7FFF7;
-            --card-bg: #FFFFFF;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wave Explorer E-Learning</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
+  <link rel="stylesheet" href="style.css">
 
-        header {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
+  <!-- Swiper -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
 
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Card System */
-        .card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border: 3px solid transparent;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-intro { border-color: var(--accent); }
-        .card-teacher { border-color: var(--secondary); }
-        .card-pbl { border-color: var(--primary); }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            background-color: #ff5252;
-            transform: scale(1.05);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary);
-            box-shadow: 0 5px 15px rgba(78,205,196,0.4);
-        }
-
-        .btn-secondary:hover { background-color: #3dbbb2; }
-
-        /* Navigation / Tabs untuk PBL Steps */
-        .pbl-nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
-        }
-
-        .tab-btn {
-            padding: 10px 15px;
-            border: 2px solid var(--secondary);
-            background: white;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: bold;
-            color: var(--secondary);
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .pbl-content {
-            display: none;
-        }
-
-        .pbl-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        /* Simulasi Ripple Tank / Gelombang */
-        .simulation-container {
-            background: #eef2f3;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .wave-display {
-            width: 100%;
-            height: 150px;
-            background: #234253;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .wave-line {
-            width: 200%;
-            height: 100%;
-            position: absolute;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,60 C150,110 350,10 500,60 C650,110 850,10 1000,60 C1150,110 1350,10 1500,60 L1500,120 L0,120 Z" fill="%234ECDC4"/></svg>') repeat-x;
-            background-size: 50% 100%;
-            animation: wave-move 4s linear infinite;
-            bottom: 0;
-            opacity: 0.8;
-        }
-
-        @keyframes wave-move {
-            0% { left: 0; }
-            100% { left: -100%; }
-        }
-
-        .controls {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            text-align: left;
-        }
-
-        .control-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Role Cards */
-        .role-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .role-card {
-            background: #f9f9f9;
-            border: 2px solid #ddd;
-            border-radius: 15px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .role-card:hover, .role-card.selected {
-            border-color: var(--primary);
-            background: #fff5f5;
-            transform: scale(1.02);
-        }
-
-        .role-icon {
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
-
-        /* Form / Worksheet input */
-        textarea, input[type="text"], select {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            margin-top: 5px;
-            font-size: 1rem;
-        }
-
-        textarea:focus, select:focus {
-            border-color: var(--secondary);
-            outline: none;
-        }
-
-        /* Teacher Profile Section */
-        .teacher-profile {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .avatar {
-            width: 90px;
-            height: 90px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            flex-shrink: 0;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .controls, .teacher-profile {
-                grid-template-columns: 1fr;
-                flex-direction: column;
-                text-align: center;
-            }
-            header h1 { font-size: 1.8rem; }
-        }
-    </style>
 </head>
 <body>
 
-    <header>
-        <h1>🌊 WaveQuest 💡</h1>
-        <p>Materi Fisika Kelas VIII: Gelombang & Cahaya dalam Kehidupan Manusia</p>
-    </header>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">🌊 Wave Explorer</div>
 
-    <div class="container">
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#teacher">Teacher</a></li>
+    <li><a href="#lesson">Lesson</a></li>
+    <li><a href="#simulation">Simulation</a></li>
+    <li><a href="#sdgs">SDGs</a></li>
+    <li><a href="#bluegreen">Blue & Green</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+  </ul>
+</nav>
 
-        <section id="intro-section" class="card card-intro">
-            <h2>Selamat Datang, Penjelajah Sains! 👋</h2>
-            <p style="font-size: 1.1rem; margin: 15px 0; color: #444; font-weight: 500;">
-                "Have you ever thought about how much light and waves actually do for us? From the sunlight that wakes you up in the morning to the Wi-Fi that keeps you connected — they're quietly working everywhere, every single day. <br><br>
-                On this website, we'll break down how waves and light benefit human life in the most interesting ways possible. Easy to read, fun to explore. Let's dive in!"
-            </p>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="btn" onclick="scrollToPBL()">Mulai Petualangan Gelombang! 🚀</button>
-            </div>
-        </section>
+<!-- HERO -->
+<section class="hero" id="home">
 
-        <section class="card card-teacher">
-            <div class="teacher-profile">
-                <div class="avatar">👩‍🔬</div>
-                <div>
-                    <h3>About Teacher</h3>
-                    <p style="font-size: 0.95rem; color: #555; margin-top: 5px;">
-                        Hi! I am <strong>Devi Salsabila</strong>, an undergraduate student majoring in International Program on Science Education UPI. With my strong interest in science, I develop this website to help middle school students understand about The Benefits of Waves and Light for Humans. This website provides students with explanations, activities, and small quiz that support them in building their conceptual understanding. I hope this website can become a helpful learning companion for students and a useful resource for teachers who are interested in innovative science learning. Thank you for visiting, and I hope you enjoy learning science!
-                    </p>
-                </div>
-            </div>
-        </section>
+  <div class="floating wave1"></div>
+  <div class="floating wave2"></div>
+  <div class="floating wave3"></div>
 
-        <section id="pbl-section" class="card card-pbl">
-            <h2 style="margin-bottom: 10px; color: var(--dark);">🎯 Tantangan Utama (Driving Challenge)</h2>
-            <p style="font-style: italic; background: #fff9db; padding: 10px 15px; border-left: 5px solid var(--accent); border-radius: 5px; margin-bottom: 25px;">
-                "Bagaimana kita bisa memodelkan energi gelombang yang tidak terlihat untuk memprediksi dampaknya terhadap teknologi dan keselamatan manusia?"
-            </p>
+  <div class="hero-content">
 
-            <div class="pbl-nav">
-                <button class="tab-btn active" onclick="openPhase(event, 'phase1')">1. Orientasi Masalah</button>
-                <button class="tab-btn" onclick="openPhase(event, 'phase2')">2. Lab & Simulasi</button>
-                <button class="tab-btn" onclick="openPhase(event, 'phase3')">3. Peran & Diskusi</button>
-                <button class="tab-btn" onclick="openPhase(event, 'phase4')">4. Laporan & Kuis</button>
-            </div>
+    <h1>
+      Benefits of Waves and Light
+      <span>for Human Life</span>
+    </h1>
 
-            <div id="phase1" class="pbl-content active">
-                <h3>🔍 Eksplorasi Fenomena Nyata</h3>
-                <p>Gelombang ada di sekitar kita! Mari kita amati dua skenario nyata di masyarakat saat ini:</p>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0;">
-                    <div style="background: #e8f8f5; padding: 15px; border-radius: 10px;">
-                        <h4>📡 Skenario 1: Menara 5G</h4>
-                        <p style="font-size: 0.9rem;">Sebuah kota di Indonesia sedang memperdebatkan pemasangan menara jaringan 5G di dekat sekolah dasar. Warga khawatir akan efek radiasinya.</p>
-                    </div>
-                    <div style="background: #fef9e7; padding: 15px; border-radius: 10px;">
-                        <h4>🏥 Skenario 2: Alat Ultrasonografi (USG)</h4>
-                        <p style="font-size: 0.9rem;">Rumah Sakit daerah ingin membeli mesin USG baru berfrekuensi tinggi untuk memantau kesehatan bayi sebelum lahir karena dinilai sangat aman.</p>
-                    </div>
-                </div>
+    <p class="intro-text">
+      Have you ever thought about how much light and waves actually do for us?
+      From the sunlight that wakes you up in the morning to the Wi-Fi that keeps you connected —
+      they're quietly working everywhere, every single day.
+      On this website, we'll break down how waves and light benefit human life
+      in the most interesting ways possible.
+      Easy to read, fun to explore.
+      Let's dive in!
+    </p>
 
-                <blockquote style="background: #f4f6f7; padding: 10px; border-left: 4px solid var(--secondary); font-size: 0.9rem; margin-bottom: 15px;">
-                    <strong>Pertanyaan Pemicu:</strong> Mengapa gelombang suara frekuensi tinggi aman digunakan di dalam tubuh (USG), sedangkan radiasi menara sinyal sering memicu kekhawatiran warga? Ciri gelombang apa yang menentukannya?
-                </blockquote>
-            </div>
+    <a href="#teacher" class="start-btn">🚀 Start Learning</a>
 
-            <div id="phase2" class="pbl-content">
-                <h3>🔬 Virtual Ripple Tank & Lab Rumus Gelombang</h3>
-                <p>Ubah nilai Frekuensi ($f$) atau Kecepatan ($v$) di bawah ini untuk melihat bagaimana panjang gelombang ($\lambda$) berubah sesuai persamaan: </p>
-                
-                <p style="text-align: center; font-size: 1.2rem; font-weight: bold; margin: 10px 0; color: var(--primary);">
-                    $$v = f \times \lambda \quad \Rightarrow \quad \lambda = \frac{v}{f}$$
-                </p>
+  </div>
 
-                <div class="simulation-container">
-                    <div class="wave-display" id="waveDisplay">
-                        <div class="wave-line" id="visualWave"></div>
-                    </div>
-                    
-                    <div class="controls">
-                        <div class="control-group">
-                            <label for="freqInput">🎛️ Frekuensi ($f$): <span id="freqVal">2</span> Hz</label>
-                            <input type="range" id="freqInput" min="1" max="5" step="0.5" value="2" oninput="updateWaveSim()">
-                        </div>
-                        <div class="control-group">
-                            <label for="speedInput">⚡ Cepat Rambat ($v$): <span id="speedVal">1500</span> m/s</label>
-                            <input type="range" id="speedInput" min="1000" max="3000" step="100" value="1500" oninput="updateWaveSim()">
-                        </div>
-                    </div>
+  <img
+    class="hero-image"
+    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop"
+    alt="waves"
+  >
+</section>
 
-                    <div style="margin-top: 15px; background: white; padding: 10px; border-radius: 10px; font-weight: bold;">
-                        📏 Hasil Perhitungan Panjang Gelombang ($\lambda$): <span id="lambdaResult" style="color:var(--secondary)">750.00</span> meter
-                    </div>
-                </div>
-                <p style="font-size: 0.85rem; color:#666;">*Grafik di atas menyimulasikan pergerakan riak gelombang. Semakin tinggi frekuensi, jarak antargelombang akan terlihat semakin rapat!</p>
-            </div>
+<!-- ABOUT TEACHER -->
+<section class="teacher-section" id="teacher">
 
-            <div id="phase3" class="pbl-content">
-                <h3>🎭 Kumpulkan Bukti Berdasarkan Peranmu!</h3>
-                <p>Pilih salah satu peran penasihat komunitas di bawah ini untuk menganalisis masalah teknologi gelombang:</p>
-                
-                <div class="role-grid">
-                    <div class="role-card" onclick="selectRole(this, 'Insinyur Telekomunikasi', 'Fokus pada pembangunan infrastruktur sinyal yang merata dan cepat.')">
-                        <div class="role-icon">📡</div>
-                        <strong>Insinyur Sinyal</strong>
-                    </div>
-                    <div class="role-card" onclick="selectRole(this, 'Fisikawan Medis', 'Fokus pada pemanfaatan gelombang untuk mendeteksi penyakit dengan aman.')">
-                        <div class="role-icon">🩺</div>
-                        <strong>Fisikawan Medis</strong>
-                    </div>
-                    <div class="role-card" onclick="selectRole(this, 'Aktivis Kesehatan', 'Fokus pada perlindungan warga dari risiko radiasi jangka panjang.')">
-                        <div class="role-icon">🏡</div>
-                        <strong>Aktivis Warga</strong>
-                    </div>
-                </div>
+  <div class="teacher-card">
 
-                <div id="role-workspace" style="display:none; background:#f9f9f9; padding:15px; border-radius:12px; margin-top:15px;">
-                    <h4 id="selected-role-title">Peran Anda: -</h4>
-                    <p id="selected-role-desc" style="font-size:0.9rem; margin-bottom:10px; color:#555;"></p>
-                    <label>Tuliskan 1 rekomendasi aksi nyata untuk penggunaan teknologi gelombang yang aman di daerahmu:</label>
-                    <textarea id="role-action-input" rows="3" placeholder="Contoh: Memberikan batas jarak aman menara 5G dari pemukiman warga..."></textarea>
-                    <button class="btn btn-secondary" style="margin-top: 10px; padding: 6px 15px; font-size:0.9rem;" onclick="saveRoleAction()">Simpan Rekomendasi</button>
-                </div>
-            </div>
-
-            <div id="phase4" class="pbl-content">
-                <h3>📝 Evaluasi Pemahaman & Kuis Kilat</h3>
-                
-                <div style="background: #fcfcfc; padding: 15px; border: 1px solid #ddd; border-radius: 12px; margin-bottom: 20px;">
-                    <h4>🧠 Uji Kuis Cepat</h4>
-                    <p style="margin-top: 10px; font-size:0.95rem;"><strong>Soal:</strong> Jika sebuah gelombang suara USG memiliki cepat rambat $v = 1500 \text{ m/s}$ dan bergetar dengan frekuensi $f = 3 \text{ Hz}$, berapakah panjang gelombangnya?</p>
-                    
-                    <div style="margin: 10px 0;">
-                        <input type="radio" name="quiz" id="q1" value="wrong1"> <label for="q1">4500 meter</label><br>
-                        <input type="radio" name="quiz" id="q2" value="correct"> <label for="q2">500 meter</label><br>
-                        <input type="radio" name="quiz" id="q3" value="wrong2"> <label for="q3">0.002 meter</label>
-                    </div>
-                    <button class="btn" style="padding: 5px 15px; font-size: 0.9rem;" onclick="checkQuiz()">Periksa Jawaban</button>
-                    <p id="quizFeedback" style="margin-top:10px; font-weight:bold;"></p>
-                </div>
-
-                <div style="background: #eef9ff; padding: 15px; border-radius: 12px; text-align: center;">
-                    <h4>🌍 Komitmen Keberlanjutanmu (SDG 3 & 9)</h4>
-                    <p style="font-size:0.9rem; margin-bottom:10px;">Sebagai warga dunia yang bijak, mari gunakan teknologi gelombang secara bertanggung jawab.</p>
-                    <button class="btn btn-secondary" onclick="generateReport()">Unduh Laporan Belajarmu</button>
-                </div>
-            </div>
-
-        </section>
+    <div class="teacher-image">
+      <img src="https://drive.google.com/thumbnail?id=1G87Tsr554jaFc2K3mpoyOL3nRG2aeqKT" alt="teacher">
     </div>
 
-    <footer style="text-align: center; padding: 20px; font-size: 0.85rem; color: #777;">
-        © 2026 WaveQuest E-Learning Platform • Dikembangkan sesuai Kurikulum IPA Terintegrasi ESD
-    </footer>
+    <div class="teacher-text">
+      <h2>👩‍🏫 About Teacher</h2>
 
-    <script>
-        // Membantu navigasi otomatis saat tombol "Mulai" diklik
-        function scrollToPBL() {
-            document.getElementById('pbl-section').scrollIntoView({ behavior: 'smooth' });
-        }
+      <p>
+        Hi! I am <strong>Devi Salsabila</strong>, an undergraduate student majoring in
+        International Program on Science Education UPI.
+      </p>
 
-        // Sistem Tab Navigasi PBL
-        function openPhase(evt, phaseId) {
-            let i, pblContent, tabBtns;
-            pblContent = document.getElementsByClassName("pbl-content");
-            for (i = 0; i < pblContent.length; i++) {
-                pblContent[i].classList.remove("active");
-            }
-            tabBtns = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tabBtns.length; i++) {
-                tabBtns[i].classList.remove("active");
-            }
-            document.getElementById(phaseId).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
+      <p>
+        With my strong interest in science, I develop this website to help middle school students
+        understand about Characteristic of Waves.
+      </p>
 
-        // Simulasi Rumus Gelombang Terintegrasi v = f * lambda
-        function updateWaveSim() {
-            const freq = parseFloat(document.getElementById('freqInput').value);
-            const speed = parseFloat(document.getElementById('speedInput').value);
-            
-            // Perbarui label teks
-            document.getElementById('freqVal').innerText = freq;
-            document.getElementById('speedVal').innerText = speed;
+      <p>
+        This website provides students with explanations, activities, and small quiz that support
+        them in building their conceptual understanding.
+      </p>
 
-            // Hitung lambda = v / f
-            const lambda = speed / freq;
-            document.getElementById('lambdaResult').innerText = lambda.toFixed(2);
+      <p>
+        I hope this website can become a helpful learning companion for students and a useful
+        resource for teachers who are interested in innovative science learning.
+      </p>
 
-            // Mengubah visualisasi kecepatan animasi riak air berdasarkan frekuensi
-            const visualWave = document.getElementById('visualWave');
-            // Semakin tinggi frekuensi, animasi bergerak lebih rapat/cepat
-            let duration = 6 - freq; 
-            visualWave.style.animationDuration = duration + 's';
-        }
+      <p>
+        Thank you for visiting, and I hope you enjoy learning science!
+      </p>
 
-        // Pemilihan Peran Pemangku Kepentingan (Role Play)
-        let currentRole = "";
-        function selectRole(element, roleName, roleDesc) {
-            let cards = document.getElementsByClassName('role-card');
-            for(let i=0; i<cards.length; i++) {
-                cards[i].classList.remove('selected');
-            }
-            element.classList.add('selected');
-            currentRole = roleName;
+    </div>
 
-            document.getElementById('selected-role-title').innerText = "Peran Anda: " + roleName;
-            document.getElementById('selected-role-desc').innerText = roleDesc;
-            document.getElementById('role-workspace').style.display = 'block';
-        }
+  </div>
+</section>
 
-        let savedAction = "";
-        function saveRoleAction() {
-            savedAction = document.getElementById('role-action-input').value;
-            if(savedAction.trim() === "") {
-                alert("Silakan tulis isi rekomendasi aksi terlebih dahulu ya!");
-            } else {
-                alert("Rekomendasi taktis sebagai " + currentRole + " berhasil disimpan dalam sistem pembelajaran!");
-            }
-        }
+<!-- LESSON SLIDES -->
+<section class="slides-section" id="lesson">
 
-        // Pengecekan Kuis Pembelajaran sederhana
-        function checkQuiz() {
-            const selected = document.querySelector('input[name="quiz"]:checked');
-            const feedback = document.getElementById('quizFeedback');
-            if(!selected) {
-                feedback.innerText = "❌ Silakan pilih salah satu jawaban terlebih dahulu!";
-                feedback.style.color = "orange";
-                return;
-            }
-            if(selected.value === "correct") {
-                feedback.innerText = "🎉 Hebat! Jawabanmu Benar. (1500 m/s dibagi 3 Hz = 500 meter)";
-                feedback.style.color = "green";
-            } else {
-                feedback.innerText = "❌ Kurang tepat. Ingat rumus panjang gelombang: lambda = v / f.";
-                feedback.style.color = "red";
-            }
-        }
+  <h2 class="section-title">📚 Interactive Learning Slides</h2>
 
-        // Simulasi Menghasilkan Laporan Hasil Belajar (Export Alert)
-        function generateReport() {
-            if(!currentRole || !savedAction) {
-                alert("Tips: Selesaikan aktivitas pemilihan peran dan tulis rekomendasi aksi terlebih dahulu di tab '3. Peran & Diskusi' agar laporanmu lengkap!");
-                return;
-            }
-            alert(`📝 RINGKASAN LAPORAN DIGITAL ANDA\n=================================\nPeran Komunitas: ${currentRole}\nRekomendasi Aksi: "${savedAction}"\nStatus Kuis: Selesai diuji.\n\nTerima kasih telah belajar menjaga keselamatan ekosistem berbasis Sains Gelombang!`);
-        }
+  <div class="swiper mySwiper">
 
-        // Inisialisasi tampilan awal simulasi saat web dibuka
-        window.onload = function() {
-            updateWaveSim();
-        }
-    </script>
+    <div class="swiper-wrapper">
+
+      <!-- Slide 1 -->
+      <div class="swiper-slide slide-card">
+        <img src="https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="slide-content">
+          <h3>🌊 What is a Wave?</h3>
+
+          <p>
+            A wave is a disturbance that transfers energy from one place to another.
+            Waves can travel through water, air, solids, and even space!
+          </p>
+
+          <ul>
+            <li>Mechanical Waves → need medium</li>
+            <li>Electromagnetic Waves → no medium needed</li>
+            <li>Examples: sound, ocean waves, radio waves, light</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="swiper-slide slide-card">
+        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="slide-content">
+          <h3>📡 Wave Characteristics</h3>
+
+          <p>
+            Waves have four important characteristics:
+          </p>
+
+          <div class="wave-grid">
+            <div class="wave-box">Amplitude</div>
+            <div class="wave-box">Frequency</div>
+            <div class="wave-box">Wavelength</div>
+            <div class="wave-box">Wave Speed</div>
+          </div>
+
+          <p class="formula">
+            v = fλ
+          </p>
+
+          <p>
+            Wave speed depends on frequency and wavelength.
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide slide-card">
+        <img src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="slide-content">
+          <h3>🏥 Waves in Medical Technology</h3>
+
+          <p>
+            Waves help doctors save lives!
+          </p>
+
+          <ul>
+            <li>Ultrasound → checking baby development</li>
+            <li>X-Ray → seeing bones</li>
+            <li>Laser surgery → eye treatment</li>
+            <li>MRI → body scanning</li>
+          </ul>
+
+          <p>
+            Different frequencies create different uses and safety levels.
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="swiper-slide slide-card">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="slide-content">
+          <h3>📱 Waves in Communication</h3>
+
+          <p>
+            Communication technology works because of electromagnetic waves.
+          </p>
+
+          <ul>
+            <li>Wi-Fi</li>
+            <li>Mobile phones</li>
+            <li>Radio</li>
+            <li>Satellite</li>
+            <li>Bluetooth</li>
+          </ul>
+
+          <p>
+            These technologies help people connect around the world.
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="swiper-slide slide-card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="slide-content">
+          <h3>⚠️ Technology & Safety</h3>
+
+          <p>
+            Technology is useful, but it must be used responsibly.
+          </p>
+
+          <ul>
+            <li>Too much radiation can be dangerous</li>
+            <li>People debate about 5G tower placement</li>
+            <li>Scientists study safety carefully</li>
+            <li>Communities and scientists must work together</li>
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="swiper-pagination"></div>
+
+  </div>
+</section>
+
+<!-- SIMULATION -->
+<section class="simulation-section" id="simulation">
+
+  <h2 class="section-title">🧪 Interactive Simulation & Experiment</h2>
+
+  <div class="sim-grid">
+
+    <div class="sim-card">
+      <h3>🌊 Wave on a String</h3>
+
+      <p>
+        Explore amplitude, wavelength, and frequency using this amazing PhET simulation!
+      </p>
+
+      <iframe
+        src="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="sim-card">
+      <h3>🔊 Sound Waves</h3>
+
+      <p>
+        Investigate how sound waves travel and affect loudness and pitch.
+      </p>
+
+      <iframe
+        src="https://phet.colorado.edu/sims/html/sound/latest/sound_en.html"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+
+  <div class="experiment-box">
+    <h3>🧠 Mini Experiment</h3>
+
+    <ol>
+      <li>Take a rope or slinky.</li>
+      <li>Move it slowly and observe the wave.</li>
+      <li>Move it faster and compare the wavelength.</li>
+      <li>Discuss: What happens when frequency increases?</li>
+    </ol>
+  </div>
+
+</section>
+
+<!-- SDGs -->
+<section class="sdg-section" id="sdgs">
+
+  <h2 class="section-title">🌍 Waves & Sustainable Development Goals</h2>
+
+  <div class="sdg-grid">
+
+    <div class="sdg-card">
+      <h3>SDG 3</h3>
+      <h4>Good Health & Well-Being</h4>
+
+      <p>
+        Waves are used in medical technologies such as ultrasound, laser surgery,
+        MRI, and X-ray. These technologies help doctors diagnose diseases and save lives.
+      </p>
+    </div>
+
+    <div class="sdg-card">
+      <h3>SDG 9</h3>
+      <h4>Industry, Innovation & Infrastructure</h4>
+
+      <p>
+        Communication systems such as radio, internet, satellite, and mobile networks
+        depend on wave technology. Waves support global innovation and modern infrastructure.
+      </p>
+    </div>
+
+    <div class="sdg-card">
+      <h3>SDG 17</h3>
+      <h4>Partnerships for the Goals</h4>
+
+      <p>
+        Scientists, governments, engineers, and communities must work together
+        to ensure technology is safe and beneficial for society.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- BLUE GREEN -->
+<section class="bluegreen-section" id="bluegreen">
+
+  <h2 class="section-title">🌿 Blue & Green Curriculum</h2>
+
+  <div class="bg-grid">
+
+    <div class="bg-card blue-card">
+      <h3>🌊 Blue Curriculum</h3>
+
+      <p>
+        Blue Curriculum focuses on ocean literacy and sustainability.
+        Students learn how waves, oceans, and marine ecosystems affect human life.
+      </p>
+
+      <ul>
+        <li>Ocean awareness</li>
+        <li>Marine conservation</li>
+        <li>Climate understanding</li>
+        <li>Environmental responsibility</li>
+      </ul>
+
+    </div>
+
+    <div class="bg-card green-card">
+      <h3>🌱 Green Curriculum</h3>
+
+      <p>
+        Green Curriculum integrates sustainability and climate education into learning.
+        It encourages students to become environmentally responsible citizens.
+      </p>
+
+      <ul>
+        <li>Climate education</li>
+        <li>Sustainable lifestyle</li>
+        <li>Problem solving</li>
+        <li>Eco-friendly innovation</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="reflection-box">
+
+    <h3>💡 Why Is This Important?</h3>
+
+    <p>
+      By learning about waves and light through sustainability education,
+      students not only understand science concepts but also understand how science
+      can help protect people, technology, and the environment.
+    </p>
+
+    <p>
+      Students become future problem solvers who can use science responsibly.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- QUIZ -->
+<section class="quiz-section" id="quiz">
+
+  <h2 class="section-title">🎯 Quick Quiz</h2>
+
+  <div class="quiz-box">
+
+    <div class="question">
+      <h3>1. Which wave characteristic determines how often a wave occurs?</h3>
+
+      <button onclick="checkAnswer(this, true)">Frequency</button>
+      <button onclick="checkAnswer(this, false)">Amplitude</button>
+      <button onclick="checkAnswer(this, false)">Speed</button>
+    </div>
+
+    <div class="question">
+      <h3>2. Which technology uses waves for medical imaging?</h3>
+
+      <button onclick="checkAnswer(this, false)">Wi-Fi</button>
+      <button onclick="checkAnswer(this, true)">Ultrasound</button>
+      <button onclick="checkAnswer(this, false)">Bluetooth</button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <h2>🌊 Wave Explorer E-Learning</h2>
+  <p>Created for Middle School Science Learning</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>

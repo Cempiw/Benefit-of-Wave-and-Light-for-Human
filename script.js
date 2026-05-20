@@ -53,10 +53,14 @@ const quizData = [
 
 let currentQuestion = 0;
 let score = 0;
-
+function updateProgress() {
+  let percent = (currentQuestion / quizData.length) * 100;
+  document.getElementById("progressBar").style.width = percent + "%";
+}
 function loadQuestion() {
-  let q = quizData[currentQuestion];
+  updateProgress();
 
+  let q = quizData[currentQuestion];
   document.getElementById("question").innerText = q.question;
 
   let answersDiv = document.getElementById("answers");

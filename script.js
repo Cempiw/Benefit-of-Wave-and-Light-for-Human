@@ -1,6 +1,11 @@
-let slides = document.querySelectorAll(".slide");
+let slides;
 let currentSlide = 0;
 
+window.onload = function () {
+  slides = document.querySelectorAll(".slide");
+
+  loadQuestion(); // tetap jalanin quiz
+};
 function nextSlide() {
   slides[currentSlide].classList.remove("active");
   currentSlide++;
@@ -83,6 +88,16 @@ function loadQuestion() {
 
 function selectAnswer(index) {
   let correct = quizData[currentQuestion].correct;
+  let buttons = document.querySelectorAll("#answers button");
+
+  buttons.forEach((btn, i) => {
+    if (i === correct) {
+      btn.style.background = "#4CAF50";
+    } else {
+      btn.style.background = "#ff6b6b";
+    }
+    btn.disabled = true;
+  });
 
   if (index === correct) {
     document.getElementById("feedback").innerText = "✅ Correct!";
@@ -93,7 +108,6 @@ function selectAnswer(index) {
 
   document.getElementById("nextBtn").style.display = "inline-block";
 }
-
 function nextQuestion() {
   currentQuestion++;
 

@@ -1,9 +1,13 @@
-let currentSlide = 1;
+let slides = document.querySelectorAll(".slide");
+let currentSlide = 0;
 
 function nextSlide() {
-  document.getElementById("slide" + currentSlide).classList.remove("active");
+  slides[currentSlide].classList.remove("active");
   currentSlide++;
-  document.getElementById("slide" + currentSlide).classList.add("active");
+
+  if (currentSlide < slides.length) {
+    slides[currentSlide].classList.add("active");
+  }
 }
 
 // ================= QUIZ SYSTEM =================

@@ -1,45 +1,38 @@
-// SWIPER
-var swiper = new Swiper(".mySwiper", {
+let currentSlide = 1;
 
-  loop:true,
-
-  pagination:{
-    el:".swiper-pagination",
-  },
-
-});
-
-// SCROLL
-function scrollToSection(id){
-
-  document.getElementById(id).scrollIntoView({
-    behavior:"smooth"
-  });
-
+function nextSlide() {
+  document.getElementById("slide" + currentSlide).classList.remove("active");
+  currentSlide++;
+  document.getElementById("slide" + currentSlide).classList.add("active");
 }
 
-// ALERT BUTTON
-function showAlert(message){
-
-  alert(message);
-
+function checkAnswer(correct) {
+  document.getElementById("result").innerHTML =
+    correct ? "✅ Correct!" : "❌ Try again!";
 }
 
-// QUIZ
-function checkAnswer(button,correct){
+function startWave() {
+  let canvas = document.getElementById("waveCanvas");
+  let ctx = canvas.getContext("2d");
 
-  if(correct){
+  canvas.width = 400;
+  canvas.height = 200;
 
-    button.style.background="#22c55e";
-    button.innerHTML="✅ Correct!";
+  let t = 0;
 
+  function draw() {
+    ctx.clearRect(0, 0, 400, 200);
+
+    ctx.beginPath();
+    for (let x = 0; x < 400; x++) {
+      let y = 100 + 30 * Math.sin((x + t) * 0.05);
+      ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    t += 2;
+    requestAnimationFrame(draw);
   }
 
-  else{
-
-    button.style.background="#ef4444";
-    button.innerHTML="❌ Try Again";
-
-  }
-
+  draw();
 }

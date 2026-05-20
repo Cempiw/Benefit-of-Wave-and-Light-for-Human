@@ -1,206 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Lumina Wave</title>
-
-  <link rel="stylesheet" href="style.css">
-
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-  />
-
+<meta charset="UTF-8">
+<title>PBL Waves Learning</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav>
+<div class="slide active" id="slide1">
+  <h1>🌊 Waves & Light Learning</h1>
+
+  <p class="intro">
+    Have you ever thought about how much light and waves actually do for us? 
+    From the sunlight that wakes you up in the morning to the Wi-Fi that keeps you connected! 
+    they're quietly working everywhere, every single day. 
+    On this website, we'll break down how waves and light benefit human life in the most interesting ways possible. 
+    Easy to read, fun to explore. Let's dive in!
+  </p>
 
-  <h1>🌈 Lumina Wave</h1>
+  <button onclick="nextSlide()">Start 🚀</button>
+</div>
 
-  <div class="menu">
+<!-- LEARNING OBJECTIVES -->
+<div class="slide" id="slide2">
+  <h2>🎯 Learning Objectives</h2>
 
-    <a href="#home">Home</a>
-    <a href="#problem">Problem</a>
-    <a href="#materials">Materials</a>
-    <a href="#simulation">Simulation</a>
-    <a href="#quiz">Quiz</a>
+  <ul>
+    <li>C1: Identify characteristics of waves</li>
+    <li>C2: Explain types of waves</li>
+    <li>C3: Apply wave concepts in daily life</li>
+    <li>C4: Analyze benefits of waves for humanity</li>
+  </ul>
 
-  </div>
+  <h3>📌 Indicators</h3>
+  <ul>
+    <li>Students can define waves correctly</li>
+    <li>Students can differentiate wave types</li>
+    <li>Students can explain real-life applications</li>
+  </ul>
 
-</nav>
+  <button onclick="nextSlide()">Next ➡️</button>
+</div>
 
-<!-- HERO -->
-<section class="hero" id="home">
+<!-- ABOUT TEACHER -->
+<div class="slide" id="slide3">
+  <h2>👩‍🏫 About Teacher</h2>
 
-  <div class="hero-text">
+  <img src="https://drive.google.com/uc?export=view&id=1G87Tsr554jaFc2K3mpoyOL3nRG2aeqKT" class="profile">
 
-    <h1>🌊 Lumina Wave</h1>
+  <p>
+    Hi! I am Devi Salsabila, an undergraduate student majoring in International Program on Science Education UPI...
+  </p>
 
-    <h2>Interactive PBL Learning</h2>
+  <button onclick="nextSlide()">Next ➡️</button>
+</div>
 
-    <p>
-      Have you ever thought about how much light and waves actually do for us?
-      From sunlight to Wi-Fi, waves are everywhere!
-    </p>
+<!-- PBL 1 -->
+<div class="slide" id="slide4">
+  <h2>🔍 Problem Orientation</h2>
 
-    <button onclick="scrollToSection('problem')">
-      🚀 Start Investigation
-    </button>
-
-  </div>
-
-  <img src="assets/images/hero-wave.png" class="hero-img">
-
-</section>
-
-<!-- PROBLEM -->
-<section class="problem" id="problem">
-
-  <h2>🌍 Real World Problems</h2>
-
-  <div class="card-container">
-
-    <div class="card">
-
-      <img src="assets/images/5g.jpg">
-
-      <h3>📡 5G Tower Near School</h3>
-
-      <p>
-        Is wave technology always safe?
-      </p>
-
-      <button onclick="showAlert('Think about benefits and risks!')">
-        Analyze
-      </button>
-
-    </div>
-
-    <div class="card">
-
-      <img src="assets/images/ultrasound.jpg">
-
-      <h3>🏥 Ultrasound Technology</h3>
-
-      <p>
-        How do waves help healthcare?
-      </p>
-
-      <button onclick="showAlert('Ultrasound uses sound waves!')">
-        Explore
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- MATERIALS -->
-<section class="materials" id="materials">
-
-  <h2>📚 Wave Characteristics</h2>
-
-  <div class="swiper mySwiper">
-
-    <div class="swiper-wrapper">
-
-      <div class="swiper-slide slide">
-
-        <img src="assets/images/wave.jpg">
-
-        <h3>🌊 What is a Wave?</h3>
-
-        <p>
-          A wave transfers energy from one place to another.
-        </p>
-
-      </div>
-
-      <div class="swiper-slide slide">
-
-        <img src="assets/images/communication.jpg">
-
-        <h3>📡 Communication Technology</h3>
-
-        <p>
-          Wi-Fi and mobile phones use electromagnetic waves.
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="swiper-pagination"></div>
-
-  </div>
-
-</section>
-
-<!-- SIMULATION -->
-<section class="simulation" id="simulation">
-
-  <h2>🧪 Interactive Simulation</h2>
-
-  <div class="sim-box">
-
-    <iframe
-      src="https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html"
-      allowfullscreen>
-    </iframe>
-
-  </div>
-
-</section>
-
-<!-- QUIZ -->
-<section class="quiz" id="quiz">
-
-  <h2>🎯 Quick Quiz</h2>
-
-  <div class="quiz-box">
-
-    <h3>
-      Which characteristic determines the number of waves per second?
-    </h3>
-
-    <button onclick="checkAnswer(this,true)">
-      Frequency
-    </button>
-
-    <button onclick="checkAnswer(this,false)">
-      Amplitude
-    </button>
-
-    <button onclick="checkAnswer(this,false)">
-      Wavelength
-    </button>
-
-  </div>
-
-</section>
-
-<!-- BACK BUTTON -->
-<button class="back-top" onclick="scrollToSection('home')">
-  ⬆
-</button>
-
-<footer>
-
-  <h2>🌈 Lumina Wave</h2>
-
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <p>
+    Why can we communicate using phones and internet without seeing the signals?
+  </p>
+
+  <p><b>Driving Question:</b><br>
+  How do waves transfer energy and support human life?</p>
+
+  <button onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<!-- PBL 2 -->
+<div class="slide" id="slide5">
+  <h2>🧠 Investigation</h2>
+
+  <p><b>Definition:</b> Wave is energy transfer without matter movement.</p>
+
+  <h3>Wave Equation</h3>
+  <p>v = f × λ</p>
+
+  <p>
+    Where:
+    <br>v = wave speed
+    <br>f = frequency
+    <br>λ = wavelength
+  </p>
+
+  <canvas id="waveCanvas"></canvas>
+
+  <button onclick="startWave()">Run Simulation</button>
+  <button onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<!-- PBL 3 -->
+<div class="slide" id="slide6">
+  <h2>🧪 Experiment</h2>
+
+  <p>Use rope/slinky to observe wave motion.</p>
+
+  <h3>Analysis Questions (HOTS)</h3>
+  <ul>
+    <li>Why does energy move but not the medium?</li>
+    <li>How does amplitude affect energy?</li>
+  </ul>
+
+  <button onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<!-- PBL 4 -->
+<div class="slide" id="slide7">
+  <h2>🎯 Evaluation</h2>
+
+  <p>Wave transfers...</p>
+  <button onclick="checkAnswer(true)">Energy</button>
+  <button onclick="checkAnswer(false)">Matter</button>
+
+  <p id="result"></p>
+
+  <button onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<!-- SDGs -->
+<div class="slide" id="slide8">
+  <h2>🌍 SDGs Integration</h2>
+
+  <h3>SDG 7</h3>
+  <p>Solar energy uses electromagnetic waves → renewable energy</p>
+
+  <h3>SDG 9</h3>
+  <p>Wi-Fi & communication → innovation infrastructure</p>
+
+  <h3>SDG 13</h3>
+  <p>Satellite waves monitor climate change</p>
+
+  <h3>SDG 3</h3>
+  <p>X-rays & lasers → healthcare technology</p>
+
+  <h2>🌱 Curriculum Integration</h2>
+
+  <p><b>Blue Curriculum:</b> ocean waves & sustainability</p>
+  <p><b>Green Curriculum:</b> environmental awareness</p>
+
+  <button onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<!-- RUBRIC -->
+<div class="slide" id="slide9">
+  <h2>📊 Assessment Rubric</h2>
+
+  <table border="1">
+    <tr>
+      <th>Criteria</th>
+      <th>Excellent</th>
+      <th>Good</th>
+      <th>Needs Improvement</th>
+    </tr>
+    <tr>
+      <td>Concept Understanding</td>
+      <td>Clear & accurate</td>
+      <td>Minor errors</td>
+      <td>Misconception</td>
+    </tr>
+    <tr>
+      <td>Application</td>
+      <td>Real-life connection</td>
+      <td>Basic example</td>
+      <td>No example</td>
+    </tr>
+  </table>
+
+  <button onclick="nextSlide()">Finish 🎉</button>
+</div>
+
+<div class="slide" id="slide10">
+  <h2>🎉 Congratulations!</h2>
+  <p>You completed an academic PBL lesson!</p>
+</div>
 
 <script src="script.js"></script>
-
 </body>
 </html>

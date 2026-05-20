@@ -1,4 +1,3 @@
-// SWIPER
 var swiper = new Swiper(".mySwiper", {
   effect: "cards",
   grabCursor: true,
@@ -9,7 +8,6 @@ var swiper = new Swiper(".mySwiper", {
   },
 });
 
-// QUIZ
 function checkAnswer(button, correct){
 
   if(correct){

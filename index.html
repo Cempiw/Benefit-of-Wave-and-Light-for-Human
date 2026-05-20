@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>PBL Waves Learning</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Wave Learning - PBL</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
+<!-- SLIDE CONTAINER -->
 <div class="slide active" id="slide1">
   <h1>🌊 Waves & Light Learning</h1>
 
@@ -22,159 +22,185 @@
   <button onclick="nextSlide()">Start 🚀</button>
 </div>
 
-<!-- LEARNING OBJECTIVES -->
-<div class="slide" id="slide2">
-  <h2>🎯 Learning Objectives</h2>
-
-  <ul>
-    <li>C1: Identify characteristics of waves</li>
-    <li>C2: Explain types of waves</li>
-    <li>C3: Apply wave concepts in daily life</li>
-    <li>C4: Analyze benefits of waves for humanity</li>
-  </ul>
-
-  <h3>📌 Indicators</h3>
-  <ul>
-    <li>Students can define waves correctly</li>
-    <li>Students can differentiate wave types</li>
-    <li>Students can explain real-life applications</li>
-  </ul>
-
-  <button onclick="nextSlide()">Next ➡️</button>
-</div>
-
 <!-- ABOUT TEACHER -->
-<div class="slide" id="slide3">
+<div class="slide" id="slide2">
   <h2>👩‍🏫 About Teacher</h2>
 
   <img src="https://drive.google.com/uc?export=view&id=1G87Tsr554jaFc2K3mpoyOL3nRG2aeqKT" class="profile">
 
   <p>
-    Hi! I am Devi Salsabila, an undergraduate student majoring in International Program on Science Education UPI...
+    Hi! I am Devi Salsabila, an undergraduate student majoring in International Program on Science Education UPI. 
+    With my strong interest in science, I develop this website to help middle school students understand about Characteristic of Waves. 
+    This website provides students with explanations, activities, and small quiz that support them in building their conceptual understanding. 
+    I hope this website can become a helpful learning companion for students and a useful resource for teachers who are interested in innovative science learning. 
+    Thank you for visiting, and I hope you enjoy learning science!
   </p>
 
   <button onclick="nextSlide()">Next ➡️</button>
 </div>
 
-<!-- PBL 1 -->
-<div class="slide" id="slide4">
+<!-- PBL STEP 1 -->
+<div class="slide" id="slide3">
   <h2>🔍 Problem Orientation</h2>
 
   <p>
-    Why can we communicate using phones and internet without seeing the signals?
+    Imagine this: You are using your phone to send a message. 
+    The signal travels through invisible waves. But how does it work?
   </p>
 
-  <p><b>Driving Question:</b><br>
-  How do waves transfer energy and support human life?</p>
+  <p>
+    Driving Question:
+    <b>"How do waves transfer energy and how do they benefit human life?"</b>
+  </p>
+
+  <p>
+    In this lesson, you will act as a young scientist to investigate how waves behave 
+    and how they are used in daily life such as communication, medicine, and energy.
+  </p>
 
   <button onclick="nextSlide()">Next ➡️</button>
 </div>
 
-<!-- PBL 2 -->
-<div class="slide" id="slide5">
-  <h2>🧠 Investigation</h2>
+<!-- PBL STEP 2 -->
+<div class="slide" id="slide4">
+  <h2>🧠 Investigation (Concept Building)</h2>
 
-  <p><b>Definition:</b> Wave is energy transfer without matter movement.</p>
-
-  <h3>Wave Equation</h3>
-  <p>v = f × λ</p>
-
+  <p><b>What is a Wave?</b></p>
   <p>
-    Where:
-    <br>v = wave speed
-    <br>f = frequency
-    <br>λ = wavelength
+    A wave is a way in which energy moves from one place to another 
+    without transferring matter.
   </p>
+
+  <p><b>Types of Waves:</b></p>
+  <ul>
+    <li>🌊 Mechanical Waves (need medium, e.g., sound waves)</li>
+    <li>💡 Electromagnetic Waves (no medium, e.g., light, Wi-Fi)</li>
+  </ul>
+
+  <p><b>Wave Characteristics:</b></p>
+  <ul>
+    <li>Amplitude → height of wave (energy)</li>
+    <li>Wavelength → distance between peaks</li>
+    <li>Frequency → number of waves per second</li>
+  </ul>
 
   <canvas id="waveCanvas"></canvas>
 
-  <button onclick="startWave()">Run Simulation</button>
+  <button onclick="startWave()">Run Simulation 🌊</button>
   <button onclick="nextSlide()">Next ➡️</button>
 </div>
 
-<!-- PBL 3 -->
-<div class="slide" id="slide6">
-  <h2>🧪 Experiment</h2>
+<!-- PBL STEP 3 -->
+<div class="slide" id="slide5">
+  <h2>🧪 Experiment (Hands-on Activity)</h2>
 
-  <p>Use rope/slinky to observe wave motion.</p>
+  <p><b>Try this simple experiment at home:</b></p>
 
-  <h3>Analysis Questions (HOTS)</h3>
+  <ol>
+    <li>Take a rope or slinky</li>
+    <li>Move one end up and down</li>
+    <li>Observe how the wave travels</li>
+  </ol>
+
+  <p><b>Questions to think about:</b></p>
   <ul>
-    <li>Why does energy move but not the medium?</li>
-    <li>How does amplitude affect energy?</li>
+    <li>Does the rope move forward?</li>
+    <li>What actually travels?</li>
   </ul>
 
+  <p>
+    👉 Conclusion: Only energy moves, not the object!
+  </p>
+
   <button onclick="nextSlide()">Next ➡️</button>
 </div>
 
-<!-- PBL 4 -->
+<!-- PBL STEP 4 -->
+<div class="slide" id="slide6">
+  <h2>🎮 Interactive Quiz</h2>
+
+  <div id="quiz-container">
+    <p id="question"></p>
+
+    <div id="answers"></div>
+
+    <p id="feedback"></p>
+
+    <button id="nextBtn" onclick="nextQuestion()" style="display:none;">
+      Next Question ➡️
+    </button>
+  </div>
+
+  <p id="finalScore"></p>
+
+  <button onclick="nextSlide()">Go to SDGs ➡️</button>
+</div>
 <div class="slide" id="slide7">
-  <h2>🎯 Evaluation</h2>
+  <h2>🌍 Waves, Light & Sustainable Development Goals (SDGs)</h2>
 
-  <p>Wave transfers...</p>
-  <button onclick="checkAnswer(true)">Energy</button>
-  <button onclick="checkAnswer(false)">Matter</button>
+  <p>
+    Waves and light are not only scientific concepts but also play an important role 
+    in achieving global sustainability goals.
+  </p>
 
-  <p id="result"></p>
+  <h3>⚡ SDG 7: Affordable and Clean Energy</h3>
+  <p>
+    Light waves from the sun are used in solar panels to produce renewable energy. 
+    This helps reduce dependence on fossil fuels and supports clean energy development.
+  </p>
 
-  <button onclick="nextSlide()">Next ➡️</button>
-</div>
+  <h3>🏗️ SDG 9: Industry, Innovation, and Infrastructure</h3>
+  <p>
+    Electromagnetic waves such as radio waves, microwaves, and infrared waves are used 
+    in communication technologies like Wi-Fi, mobile phones, and satellites. 
+    These technologies support global connectivity and innovation.
+  </p>
 
-<!-- SDGs -->
-<div class="slide" id="slide8">
-  <h2>🌍 SDGs Integration</h2>
+  <h3>🌊 SDG 13: Climate Action</h3>
+  <p>
+    Waves are used in environmental monitoring systems. For example, satellite imaging 
+    uses electromagnetic waves to observe climate change, weather patterns, and natural disasters.
+  </p>
 
-  <h3>SDG 7</h3>
-  <p>Solar energy uses electromagnetic waves → renewable energy</p>
+  <h3>🏥 SDG 3: Good Health and Well-being</h3>
+  <p>
+    Light waves are used in medical technologies such as X-rays, lasers, and imaging tools 
+    that help diagnose and treat diseases.
+  </p>
 
-  <h3>SDG 9</h3>
-  <p>Wi-Fi & communication → innovation infrastructure</p>
+  <h2>🌱 Blue & Green Curriculum</h2>
 
-  <h3>SDG 13</h3>
-  <p>Satellite waves monitor climate change</p>
+  <h3>🔵 Blue Curriculum</h3>
+  <p>
+    Focuses on ocean and water sustainability. By learning about waves, students understand:
+  </p>
+  <ul>
+    <li>Ocean wave energy</li>
+    <li>Coastal processes</li>
+    <li>Impact of waves on marine ecosystems</li>
+  </ul>
 
-  <h3>SDG 3</h3>
-  <p>X-rays & lasers → healthcare technology</p>
+  <h3>🟢 Green Curriculum</h3>
+  <p>
+    Focuses on environmental awareness and sustainability. Through wave learning:
+  </p>
+  <ul>
+    <li>Students learn renewable energy (solar energy)</li>
+    <li>Understand environmental impact of technology</li>
+    <li>Develop eco-friendly thinking</li>
+  </ul>
 
-  <h2>🌱 Curriculum Integration</h2>
-
-  <p><b>Blue Curriculum:</b> ocean waves & sustainability</p>
-  <p><b>Green Curriculum:</b> environmental awareness</p>
-
-  <button onclick="nextSlide()">Next ➡️</button>
-</div>
-
-<!-- RUBRIC -->
-<div class="slide" id="slide9">
-  <h2>📊 Assessment Rubric</h2>
-
-  <table border="1">
-    <tr>
-      <th>Criteria</th>
-      <th>Excellent</th>
-      <th>Good</th>
-      <th>Needs Improvement</th>
-    </tr>
-    <tr>
-      <td>Concept Understanding</td>
-      <td>Clear & accurate</td>
-      <td>Minor errors</td>
-      <td>Misconception</td>
-    </tr>
-    <tr>
-      <td>Application</td>
-      <td>Real-life connection</td>
-      <td>Basic example</td>
-      <td>No example</td>
-    </tr>
-  </table>
+  <p>
+    👉 By combining science and sustainability, students are encouraged to become 
+    responsible global citizens.
+  </p>
 
   <button onclick="nextSlide()">Finish 🎉</button>
 </div>
-
-<div class="slide" id="slide10">
+<!-- END -->
+<div class="slide" id="slide8">
   <h2>🎉 Congratulations!</h2>
-  <p>You completed an academic PBL lesson!</p>
+  <p>You completed the lesson!</p>
 </div>
 
 <script src="script.js"></script>

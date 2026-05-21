@@ -4,8 +4,6 @@ let currentSlide = 0;
 window.onload = function () {
   slides = document.querySelectorAll(".slide");
 
-  loadQuestion(); // tetap jalanin quiz
-};
 function nextSlide() {
   slides[currentSlide].classList.remove("active");
   currentSlide++;
